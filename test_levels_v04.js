@@ -1,0 +1,5 @@
+const fs=require('fs'),path=require('path'),assert=require('assert');const P=require('./geometry.js');
+const files=fs.readdirSync('./levels').filter(f=>/^mission_\d+\.json$/.test(f)).sort();
+for(const file of files){const data=require('./levels/'+file),cars=data.vehicles.map(v=>({...v,heading:P.angleFor(v.direction)}));assert(P.inspectScene(data,cars).ok,'Initial collision '+file);
+for(let i=0;i<data.sampleSolution.length;i++){let s=data.sampleSolution[i],v=cars.find(c=>c.id===s.vehicle),r=P.inspectMove(data,cars,s.vehicle,s.to);assert(r.ok,`${file}, move ${i+1}, ${s.vehicle} to ${s.to}: ${r.reason}`);v.node=s.to;v.direction=r.endDirection;v.heading=r.endHeading;assert(P.inspectScene(data,cars).ok,'Overlap after move '+i)}
+const rescue=P.corridorStatus(data,cars);assert(rescue.ok,`${file}: final corridor blocked by ${rescue.blockedBy}: ${rescue.reason}`);console.log(`PASS ${file}: ${data.sampleSolution.length} moves, ${rescue.poses.length} target path samples, ${data.vehicles.length} vehicles.`);}

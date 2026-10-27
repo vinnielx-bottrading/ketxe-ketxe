@@ -1,0 +1,519 @@
+{
+  "project": "KẸT XE RỒI! — City Alive",
+  "id": "KXR_CITYALIVE_MISSION_05",
+  "version": "0.5.0-districts",
+  "title": "Kẹt cứng giữa công trường",
+  "status": "playable-preview",
+  "camera": {
+    "type": "top-down-orthographic",
+    "angle": 90,
+    "worldWidth": 1600,
+    "worldHeight": 900,
+    "display": "full-viewport",
+    "mobile": "zoom-follow-and-pan"
+  },
+  "rules": {
+    "move": "tap-select + drag stroke snapped to 1-3 adjacent road edges; validated atomic commit",
+    "orientation": "signed heading; ease-tangent cubic turn samples; body SAT and road-mask checks",
+    "ambulance": "automatic route only when every full-body swept segment on the corridor is clear",
+    "win": "AMB reaches HOSP",
+    "fail": "none; undo and restart",
+    "turns_for_example": 16,
+    "optimal_turns": null
+  },
+  "nodes": [
+    {
+      "id": "W0",
+      "x": 110,
+      "y": 450,
+      "kind": "road"
+    },
+    {
+      "id": "W1",
+      "x": 250,
+      "y": 450,
+      "kind": "road"
+    },
+    {
+      "id": "J1",
+      "x": 430,
+      "y": 450,
+      "kind": "intersection"
+    },
+    {
+      "id": "M1",
+      "x": 610,
+      "y": 450,
+      "kind": "road"
+    },
+    {
+      "id": "M2",
+      "x": 790,
+      "y": 450,
+      "kind": "road"
+    },
+    {
+      "id": "J2",
+      "x": 980,
+      "y": 450,
+      "kind": "intersection"
+    },
+    {
+      "id": "E1",
+      "x": 1160,
+      "y": 450,
+      "kind": "road"
+    },
+    {
+      "id": "E2",
+      "x": 1350,
+      "y": 450,
+      "kind": "road"
+    },
+    {
+      "id": "HOSP",
+      "x": 1510,
+      "y": 450,
+      "kind": "goal"
+    },
+    {
+      "id": "N1",
+      "x": 430,
+      "y": 300,
+      "kind": "road"
+    },
+    {
+      "id": "N1B",
+      "x": 430,
+      "y": 150,
+      "kind": "road"
+    },
+    {
+      "id": "N1P",
+      "x": 540,
+      "y": 150,
+      "kind": "parking-pocket"
+    },
+    {
+      "id": "S1",
+      "x": 430,
+      "y": 600,
+      "kind": "road"
+    },
+    {
+      "id": "S1B",
+      "x": 430,
+      "y": 745,
+      "kind": "road"
+    },
+    {
+      "id": "S1P",
+      "x": 290,
+      "y": 745,
+      "kind": "parking-pocket"
+    },
+    {
+      "id": "M1N",
+      "x": 610,
+      "y": 305,
+      "kind": "parking-pocket"
+    },
+    {
+      "id": "M2S",
+      "x": 790,
+      "y": 595,
+      "kind": "parking-pocket"
+    },
+    {
+      "id": "N2",
+      "x": 980,
+      "y": 300,
+      "kind": "road"
+    },
+    {
+      "id": "N2B",
+      "x": 980,
+      "y": 150,
+      "kind": "road"
+    },
+    {
+      "id": "N2P",
+      "x": 1090,
+      "y": 150,
+      "kind": "parking-pocket"
+    },
+    {
+      "id": "S2",
+      "x": 980,
+      "y": 600,
+      "kind": "road"
+    },
+    {
+      "id": "S2B",
+      "x": 980,
+      "y": 745,
+      "kind": "road"
+    },
+    {
+      "id": "S2P",
+      "x": 1120,
+      "y": 745,
+      "kind": "parking-pocket"
+    }
+  ],
+  "edges": [
+    [
+      "W0",
+      "W1"
+    ],
+    [
+      "W1",
+      "J1"
+    ],
+    [
+      "J1",
+      "M1"
+    ],
+    [
+      "M1",
+      "M2"
+    ],
+    [
+      "M2",
+      "J2"
+    ],
+    [
+      "J2",
+      "E1"
+    ],
+    [
+      "E1",
+      "E2"
+    ],
+    [
+      "E2",
+      "HOSP"
+    ],
+    [
+      "J1",
+      "N1"
+    ],
+    [
+      "N1",
+      "N1B"
+    ],
+    [
+      "N1B",
+      "N1P"
+    ],
+    [
+      "J1",
+      "S1"
+    ],
+    [
+      "S1",
+      "S1B"
+    ],
+    [
+      "S1B",
+      "S1P"
+    ],
+    [
+      "M1",
+      "M1N"
+    ],
+    [
+      "M2",
+      "M2S"
+    ],
+    [
+      "J2",
+      "N2"
+    ],
+    [
+      "N2",
+      "N2B"
+    ],
+    [
+      "N2B",
+      "N2P"
+    ],
+    [
+      "J2",
+      "S2"
+    ],
+    [
+      "S2",
+      "S2B"
+    ],
+    [
+      "S2B",
+      "S2P"
+    ]
+  ],
+  "priorityCorridor": [
+    "W0",
+    "W1",
+    "J1",
+    "M1",
+    "M2",
+    "J2",
+    "E1",
+    "E2",
+    "HOSP"
+  ],
+  "vehicles": [
+    {
+      "id": "AMB",
+      "name": "Xe cứu thương",
+      "sprite": 11,
+      "node": "W0",
+      "direction": "H",
+      "mission": true,
+      "role": "priority",
+      "physics": {
+        "shape": "oriented-rectangle",
+        "dimensions": "KXRPhysics.VEHICLES[sprite]",
+        "collisionClearancePx": 2
+      }
+    },
+    {
+      "id": "A",
+      "name": "Hatchback bạc",
+      "sprite": 10,
+      "node": "W1",
+      "direction": "H",
+      "physics": {
+        "shape": "oriented-rectangle",
+        "dimensions": "KXRPhysics.VEHICLES[sprite]",
+        "collisionClearancePx": 2
+      }
+    },
+    {
+      "id": "B",
+      "name": "Taxi vàng",
+      "sprite": 3,
+      "node": "J1",
+      "direction": "H",
+      "physics": {
+        "shape": "oriented-rectangle",
+        "dimensions": "KXRPhysics.VEHICLES[sprite]",
+        "collisionClearancePx": 2
+      }
+    },
+    {
+      "id": "C",
+      "name": "Sedan xanh",
+      "sprite": 2,
+      "node": "M1",
+      "direction": "H",
+      "physics": {
+        "shape": "oriented-rectangle",
+        "dimensions": "KXRPhysics.VEHICLES[sprite]",
+        "collisionClearancePx": 2
+      }
+    },
+    {
+      "id": "D",
+      "name": "Van giao hàng xanh",
+      "sprite": 6,
+      "node": "M2",
+      "direction": "H",
+      "physics": {
+        "shape": "oriented-rectangle",
+        "dimensions": "KXRPhysics.VEHICLES[sprite]",
+        "collisionClearancePx": 2
+      }
+    },
+    {
+      "id": "E",
+      "name": "Minibus cam",
+      "sprite": 7,
+      "node": "J2",
+      "direction": "H",
+      "physics": {
+        "shape": "oriented-rectangle",
+        "dimensions": "KXRPhysics.VEHICLES[sprite]",
+        "collisionClearancePx": 2
+      }
+    },
+    {
+      "id": "F",
+      "name": "Bán tải xám",
+      "sprite": 5,
+      "node": "S1",
+      "direction": "V",
+      "physics": {
+        "shape": "oriented-rectangle",
+        "dimensions": "KXRPhysics.VEHICLES[sprite]",
+        "collisionClearancePx": 2
+      }
+    },
+    {
+      "id": "G",
+      "name": "SUV trắng",
+      "sprite": 4,
+      "node": "N1",
+      "direction": "V",
+      "physics": {
+        "shape": "oriented-rectangle",
+        "dimensions": "KXRPhysics.VEHICLES[sprite]",
+        "collisionClearancePx": 2
+      }
+    },
+    {
+      "id": "H",
+      "name": "Xe tải nâu",
+      "sprite": 9,
+      "node": "N1B",
+      "direction": "V",
+      "physics": {
+        "shape": "oriented-rectangle",
+        "dimensions": "KXRPhysics.VEHICLES[sprite]",
+        "collisionClearancePx": 2
+      }
+    },
+    {
+      "id": "I",
+      "name": "Xe buýt xanh",
+      "sprite": 8,
+      "node": "N2",
+      "direction": "V",
+      "physics": {
+        "shape": "oriented-rectangle",
+        "dimensions": "KXRPhysics.VEHICLES[sprite]",
+        "collisionClearancePx": 2
+      }
+    },
+    {
+      "id": "J",
+      "name": "Sedan đỏ",
+      "sprite": 1,
+      "node": "N2B",
+      "direction": "V",
+      "physics": {
+        "shape": "oriented-rectangle",
+        "dimensions": "KXRPhysics.VEHICLES[sprite]",
+        "collisionClearancePx": 2
+      }
+    },
+    {
+      "id": "K",
+      "name": "Hatchback bạc chắn lối đông",
+      "sprite": 10,
+      "node": "E2",
+      "direction": "H"
+    },
+    {
+      "id": "L",
+      "name": "Taxi vàng đậu trong làn",
+      "sprite": 3,
+      "node": "S2",
+      "direction": "V"
+    },
+    {
+      "id": "M",
+      "name": "Sedan xanh chắn nơi đỗ",
+      "sprite": 2,
+      "node": "S2B",
+      "direction": "H"
+    }
+  ],
+  "sampleSolution": [
+    {
+      "vehicle": "M",
+      "to": "S2P"
+    },
+    {
+      "vehicle": "L",
+      "to": "S2B"
+    },
+    {
+      "vehicle": "H",
+      "to": "N1P"
+    },
+    {
+      "vehicle": "G",
+      "to": "N1B"
+    },
+    {
+      "vehicle": "B",
+      "to": "N1"
+    },
+    {
+      "vehicle": "F",
+      "to": "S1B"
+    },
+    {
+      "vehicle": "A",
+      "to": "J1"
+    },
+    {
+      "vehicle": "A",
+      "to": "S1"
+    },
+    {
+      "vehicle": "C",
+      "to": "M1N"
+    },
+    {
+      "vehicle": "D",
+      "to": "M2S"
+    },
+    {
+      "vehicle": "J",
+      "to": "N2P"
+    },
+    {
+      "vehicle": "I",
+      "to": "N2B"
+    },
+    {
+      "vehicle": "E",
+      "to": "N2"
+    },
+    {
+      "vehicle": "K",
+      "to": "E1"
+    },
+    {
+      "vehicle": "K",
+      "to": "J2"
+    },
+    {
+      "vehicle": "K",
+      "to": "S2"
+    }
+  ],
+  "audio": [
+    "jorisvermeer-smooth-lofi-beat-566127.mp3",
+    "xethrocc-playa-del-sol-latin-lofi-160149.mp3"
+  ],
+  "notes": [
+    "Full body rotated rectangles (SAT) replace one-node occupancy.",
+    "Swept collisions sampled at most 4 world pixels along each link including orientation interpolation.",
+    "Northern pockets shifted from y=175 to y=150 to give both long trucks and buses physically valid clearance.",
+    "All 11 example moves and entire ambulance path validated in automated geometry tests.",
+    "Turning center travel is lane-center linear with smooth heading interpolation: prototype, not realistic steering simulation.",
+    "Environment remains visual; sidewalk/curb collision, traffic AI, and route shortest path are not implemented.",
+    "The sample solution is valid but not asserted shortest.",
+    "No free steering or unrestricted lane changing",
+    "All non-target route colors match the selected vehicle paint.",
+    "Additional mission blockers validated with whole-body SAT and swept curves.",
+    "The example is a valid walk-through, not a proven shortest solution.",
+    "District visuals are independent from physical graph; road closures are enforced in geometry.inspectRoute."
+  ],
+  "level": 5,
+  "brief": "Công trường phong tỏa một đường nhánh phía tây-nam. Dời xe theo thứ tự để mở tuyến cho xe cứu thương đi qua hai giao lộ.",
+  "goalLabel": "BỆNH VIỆN",
+  "goalSymbol": "✚",
+  "missionIcon": "🚑",
+  "district": "construction",
+  "districtName": "Công trường ven phố",
+  "closedEdges": [
+    [
+      "S1B",
+      "S1P"
+    ]
+  ]
+}

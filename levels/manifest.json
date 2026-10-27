@@ -1,0 +1,50 @@
+{
+  "version": "0.5.0-districts",
+  "levels": [
+    {
+      "id": 1,
+      "title": "Mở đường cứu thương",
+      "district": "central",
+      "sample_turns": 11,
+      "closed_edges": []
+    },
+    {
+      "id": 2,
+      "title": "Xe buýt trễ chuyến",
+      "district": "central",
+      "sample_turns": 13,
+      "closed_edges": []
+    },
+    {
+      "id": 3,
+      "title": "Chuyến hàng khẩn — Khu kho",
+      "district": "warehouse",
+      "sample_turns": 14,
+      "closed_edges": []
+    },
+    {
+      "id": 4,
+      "title": "Giao hàng xuyên chợ",
+      "district": "market",
+      "sample_turns": 14,
+      "closed_edges": [
+        [
+          "S2B",
+          "S2P"
+        ]
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Kẹt cứng giữa công trường",
+      "district": "construction",
+      "sample_turns": 16,
+      "closed_edges": [
+        [
+          "S1B",
+          "S1P"
+        ]
+      ]
+    }
+  ]
+}
